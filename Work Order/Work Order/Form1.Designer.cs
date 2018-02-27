@@ -28,61 +28,67 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.Create_New_WO_bt = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.lb_Database = new System.Windows.Forms.ListBox();
+            this.bt_Create_New_WO = new System.Windows.Forms.Button();
+            this.bt_Upload = new System.Windows.Forms.Button();
+            this.bt_Delete = new System.Windows.Forms.Button();
+            this.bt_Change = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.bt_woUpdate = new System.Windows.Forms.Button();
+            this.bt_Search = new System.Windows.Forms.Button();
+            this.tb_search = new System.Windows.Forms.TextBox();
+            this.tb_WOnum = new System.Windows.Forms.TextBox();
+            this.tb_SEnum = new System.Windows.Forms.TextBox();
+            this.bt_seUpdate = new System.Windows.Forms.Button();
+            this.tb_DATE = new System.Windows.Forms.TextBox();
+            this.bt_dateUpdate = new System.Windows.Forms.Button();
+            this.tb_SNnum = new System.Windows.Forms.TextBox();
+            this.bt_snUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listBox1
+            // lb_Database
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 12);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(292, 615);
-            this.listBox1.TabIndex = 0;
+            this.lb_Database.FormattingEnabled = true;
+            this.lb_Database.Location = new System.Drawing.Point(12, 12);
+            this.lb_Database.Name = "lb_Database";
+            this.lb_Database.Size = new System.Drawing.Size(292, 615);
+            this.lb_Database.TabIndex = 0;
             // 
-            // Create_New_WO_bt
+            // bt_Create_New_WO
             // 
-            this.Create_New_WO_bt.Location = new System.Drawing.Point(310, 12);
-            this.Create_New_WO_bt.Name = "Create_New_WO_bt";
-            this.Create_New_WO_bt.Size = new System.Drawing.Size(162, 35);
-            this.Create_New_WO_bt.TabIndex = 1;
-            this.Create_New_WO_bt.Text = "Create New Order";
-            this.Create_New_WO_bt.UseVisualStyleBackColor = true;
+            this.bt_Create_New_WO.Location = new System.Drawing.Point(310, 12);
+            this.bt_Create_New_WO.Name = "bt_Create_New_WO";
+            this.bt_Create_New_WO.Size = new System.Drawing.Size(162, 35);
+            this.bt_Create_New_WO.TabIndex = 1;
+            this.bt_Create_New_WO.Text = "Create New Order";
+            this.bt_Create_New_WO.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // bt_Upload
             // 
-            this.button2.Location = new System.Drawing.Point(310, 53);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(162, 35);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.bt_Upload.Location = new System.Drawing.Point(310, 53);
+            this.bt_Upload.Name = "bt_Upload";
+            this.bt_Upload.Size = new System.Drawing.Size(162, 35);
+            this.bt_Upload.TabIndex = 2;
+            this.bt_Upload.Text = "Upload";
+            this.bt_Upload.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // bt_Delete
             // 
-            this.button3.Location = new System.Drawing.Point(310, 94);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(162, 35);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.bt_Delete.Location = new System.Drawing.Point(310, 94);
+            this.bt_Delete.Name = "bt_Delete";
+            this.bt_Delete.Size = new System.Drawing.Size(162, 35);
+            this.bt_Delete.TabIndex = 3;
+            this.bt_Delete.Text = "Delete";
+            this.bt_Delete.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // bt_Change
             // 
-            this.button4.Location = new System.Drawing.Point(310, 135);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(162, 35);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.bt_Change.Location = new System.Drawing.Point(310, 135);
+            this.bt_Change.Name = "bt_Change";
+            this.bt_Change.Size = new System.Drawing.Size(162, 35);
+            this.bt_Change.TabIndex = 4;
+            this.bt_Change.Text = "Change";
+            this.bt_Change.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
@@ -93,56 +99,117 @@
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // bt_woUpdate
             // 
-            this.button6.Location = new System.Drawing.Point(406, 217);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(66, 21);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
+            this.bt_woUpdate.Location = new System.Drawing.Point(406, 217);
+            this.bt_woUpdate.Name = "bt_woUpdate";
+            this.bt_woUpdate.Size = new System.Drawing.Size(66, 21);
+            this.bt_woUpdate.TabIndex = 6;
+            this.bt_woUpdate.Text = "Update";
+            this.bt_woUpdate.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // bt_Search
             // 
-            this.button7.Location = new System.Drawing.Point(198, 633);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(106, 21);
-            this.button7.TabIndex = 7;
-            this.button7.Text = "button7";
-            this.button7.UseVisualStyleBackColor = true;
+            this.bt_Search.Location = new System.Drawing.Point(198, 633);
+            this.bt_Search.Name = "bt_Search";
+            this.bt_Search.Size = new System.Drawing.Size(106, 21);
+            this.bt_Search.TabIndex = 7;
+            this.bt_Search.Text = "button7";
+            this.bt_Search.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // tb_search
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 633);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(169, 20);
-            this.textBox1.TabIndex = 8;
+            this.tb_search.Location = new System.Drawing.Point(12, 633);
+            this.tb_search.Name = "tb_search";
+            this.tb_search.Size = new System.Drawing.Size(169, 20);
+            this.tb_search.TabIndex = 8;
             // 
-            // textBox2
+            // tb_WOnum
             // 
-            this.textBox2.Location = new System.Drawing.Point(310, 218);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(90, 20);
-            this.textBox2.TabIndex = 9;
+            this.tb_WOnum.Location = new System.Drawing.Point(310, 218);
+            this.tb_WOnum.Name = "tb_WOnum";
+            this.tb_WOnum.Size = new System.Drawing.Size(90, 20);
+            this.tb_WOnum.TabIndex = 9;
+            this.tb_WOnum.Text = "WO#";
+            this.tb_WOnum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_SEnum
+            // 
+            this.tb_SEnum.Location = new System.Drawing.Point(310, 244);
+            this.tb_SEnum.Name = "tb_SEnum";
+            this.tb_SEnum.Size = new System.Drawing.Size(90, 20);
+            this.tb_SEnum.TabIndex = 11;
+            this.tb_SEnum.Text = "SE#";
+            this.tb_SEnum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // bt_seUpdate
+            // 
+            this.bt_seUpdate.Location = new System.Drawing.Point(406, 243);
+            this.bt_seUpdate.Name = "bt_seUpdate";
+            this.bt_seUpdate.Size = new System.Drawing.Size(66, 21);
+            this.bt_seUpdate.TabIndex = 10;
+            this.bt_seUpdate.Text = "Update";
+            this.bt_seUpdate.UseVisualStyleBackColor = true;
+            // 
+            // tb_DATE
+            // 
+            this.tb_DATE.Location = new System.Drawing.Point(310, 270);
+            this.tb_DATE.Name = "tb_DATE";
+            this.tb_DATE.Size = new System.Drawing.Size(90, 20);
+            this.tb_DATE.TabIndex = 13;
+            this.tb_DATE.Text = "Date";
+            this.tb_DATE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // bt_dateUpdate
+            // 
+            this.bt_dateUpdate.Location = new System.Drawing.Point(406, 269);
+            this.bt_dateUpdate.Name = "bt_dateUpdate";
+            this.bt_dateUpdate.Size = new System.Drawing.Size(66, 21);
+            this.bt_dateUpdate.TabIndex = 12;
+            this.bt_dateUpdate.Text = "Update";
+            this.bt_dateUpdate.UseVisualStyleBackColor = true;
+            // 
+            // tb_SNnum
+            // 
+            this.tb_SNnum.Location = new System.Drawing.Point(310, 296);
+            this.tb_SNnum.Name = "tb_SNnum";
+            this.tb_SNnum.Size = new System.Drawing.Size(90, 20);
+            this.tb_SNnum.TabIndex = 15;
+            this.tb_SNnum.Text = "SN#";
+            this.tb_SNnum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // bt_snUpdate
+            // 
+            this.bt_snUpdate.Location = new System.Drawing.Point(406, 295);
+            this.bt_snUpdate.Name = "bt_snUpdate";
+            this.bt_snUpdate.Size = new System.Drawing.Size(66, 21);
+            this.bt_snUpdate.TabIndex = 14;
+            this.bt_snUpdate.Text = "Update";
+            this.bt_snUpdate.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 711);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
+            this.ClientSize = new System.Drawing.Size(484, 661);
+            this.Controls.Add(this.tb_SNnum);
+            this.Controls.Add(this.bt_snUpdate);
+            this.Controls.Add(this.tb_DATE);
+            this.Controls.Add(this.bt_dateUpdate);
+            this.Controls.Add(this.tb_SEnum);
+            this.Controls.Add(this.bt_seUpdate);
+            this.Controls.Add(this.tb_WOnum);
+            this.Controls.Add(this.tb_search);
+            this.Controls.Add(this.bt_Search);
+            this.Controls.Add(this.bt_woUpdate);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.Create_New_WO_bt);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.bt_Change);
+            this.Controls.Add(this.bt_Delete);
+            this.Controls.Add(this.bt_Upload);
+            this.Controls.Add(this.bt_Create_New_WO);
+            this.Controls.Add(this.lb_Database);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,16 +217,22 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button Create_New_WO_bt;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ListBox lb_Database;
+        private System.Windows.Forms.Button bt_Create_New_WO;
+        private System.Windows.Forms.Button bt_Upload;
+        private System.Windows.Forms.Button bt_Delete;
+        private System.Windows.Forms.Button bt_Change;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button bt_woUpdate;
+        private System.Windows.Forms.Button bt_Search;
+        private System.Windows.Forms.TextBox tb_search;
+        private System.Windows.Forms.TextBox tb_WOnum;
+        private System.Windows.Forms.TextBox tb_SEnum;
+        private System.Windows.Forms.Button bt_seUpdate;
+        private System.Windows.Forms.TextBox tb_DATE;
+        private System.Windows.Forms.Button bt_dateUpdate;
+        private System.Windows.Forms.TextBox tb_SNnum;
+        private System.Windows.Forms.Button bt_snUpdate;
     }
 }
 

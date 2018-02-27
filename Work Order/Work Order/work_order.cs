@@ -12,6 +12,17 @@ namespace Work_Order
         public int SE_num;
         public string SN_num;
         public bool state;
+        private static string Source_link
+        {
+            get
+            {
+                return Source_link;
+            }
+            set
+            {
+                Source_link = value;
+            }
+        }
 
         private static int wo_NUM
         {
