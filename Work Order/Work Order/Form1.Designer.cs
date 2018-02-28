@@ -62,6 +62,7 @@
             this.bt_Create_New_WO.TabIndex = 1;
             this.bt_Create_New_WO.Text = "Create New Order";
             this.bt_Create_New_WO.UseVisualStyleBackColor = true;
+            this.bt_Create_New_WO.Click += new System.EventHandler(this.bt_Create_New_WO_Click);
             // 
             // bt_Upload
             // 
@@ -114,7 +115,7 @@
             this.bt_Search.Name = "bt_Search";
             this.bt_Search.Size = new System.Drawing.Size(106, 21);
             this.bt_Search.TabIndex = 7;
-            this.bt_Search.Text = "button7";
+            this.bt_Search.Text = "Search";
             this.bt_Search.UseVisualStyleBackColor = true;
             // 
             // tb_search
@@ -132,6 +133,8 @@
             this.tb_WOnum.TabIndex = 9;
             this.tb_WOnum.Text = "WO#";
             this.tb_WOnum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_WOnum.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tb_WOnum_MouseClick);
+            this.tb_WOnum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_WOnum_KeyPress);
             // 
             // tb_SEnum
             // 
@@ -141,6 +144,7 @@
             this.tb_SEnum.TabIndex = 11;
             this.tb_SEnum.Text = "SE#";
             this.tb_SEnum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_SEnum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_WOnum_KeyPress);
             // 
             // bt_seUpdate
             // 
@@ -210,6 +214,7 @@
             this.Controls.Add(this.lb_Database);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
