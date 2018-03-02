@@ -18,7 +18,7 @@ namespace Work_Order
         public int WO_num = 0;
         public int SE_num = 0;
         public string SN_num = "000 000";
-        public bool state = false;
+        public bool state = true;
         public string Client_name = "Seicor Inc.";
         public string details = "AOT 100 Ton Elevator";
         public string WO_Date;
@@ -46,18 +46,26 @@ namespace Work_Order
                 return set_arr();
             }
         }
+        /// <summary>
+        /// Method:     set_arr
+        /// 
+        /// function:   Obtain all the information in the class arrange them in
+        ///             a string array for the list view to obtain.
+        /// </summary>
+        /// <returns></returns>
         private string[] set_arr()
         {
-            string[] WO_arr = new string[6];
-            WO_arr[0] = WO_num.ToString();
-            WO_arr[1] = Client_name;
-            WO_arr[2] = SN_num;
-            WO_arr[3] = SE_num.ToString();
-            WO_arr[4] = details;
-            if (state)
-                WO_arr[5] = "Delivered";
+            string[] WO_arr = new string[7];
+            WO_arr[0] = WO_Date;
+            WO_arr[1] = WO_num.ToString();
+            WO_arr[2] = Client_name;
+            WO_arr[3] = SN_num;
+            WO_arr[4] = SE_num.ToString();
+            WO_arr[5] = details;
+            if (!state)
+                WO_arr[6] = "Delivered";
             else
-                WO_arr[5] = "Inprogress";
+                WO_arr[6] = "Inprogress";
             return WO_arr;
         }
 
