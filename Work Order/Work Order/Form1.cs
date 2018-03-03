@@ -120,7 +120,12 @@ namespace Work_Order
         /// <param name="e"></param>
         private void bt_Upload_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = ofd_uploadFile.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
 
+            }
+            Console.WriteLine(dialogResult);
         }
         /// <summary>
         /// Method:     lv_database_SelectedIndexChanged
