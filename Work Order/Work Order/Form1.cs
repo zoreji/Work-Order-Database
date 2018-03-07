@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 
 namespace Work_Order
@@ -120,11 +121,28 @@ namespace Work_Order
         /// <param name="e"></param>
         private void bt_Upload_Click(object sender, EventArgs e)
         {
+            int size = -1;
             DialogResult dialogResult = ofd_uploadFile.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {
+                //string file = ofd_uploadFile.FileName;
+                try
+                {
+                   // string text = File.ReadAllText(file);
+                    //Console.WriteLine(text);
+                    //size = text.Length;
+                    if(ofd_uploadFile.CheckFileExists)
+                    {
+                        System.IO.File.Copy(ofd_uploadFile.FileName, @"C:")
+                    }
+                }
+                catch(IOException)
+                {
 
+                }
             }
+            Console.Write(size);
+
             Console.WriteLine(dialogResult);
         }
         /// <summary>
