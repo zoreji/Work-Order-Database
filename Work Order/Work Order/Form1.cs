@@ -72,9 +72,9 @@ namespace Work_Order
                     i++;
                 }
                 //reset the textbox into the default texts
-                tb_WOnum.Text = "WO#";
-                tb_SEnum.Text = "SE#";
-                tb_SNnum.Text = "SN#";
+                //tb_WOnum.Text = "WO#";
+                //tb_SEnum.Text = "SE#";
+                //tb_SNnum.Text = "SN#";
                 tb_DATE.Text = time.ToString("MMM d, yyyy");
             }
             else
@@ -101,11 +101,36 @@ namespace Work_Order
         /// 
         /// Function:   Saves and updates the current List<work_order>
         /// </summary>
-        private void saveList()
+        private void saveList(string path, int WO)
         {
-
+            findWO(WO).Source_link = path;
         }
-
+        /// <summary>
+        /// Method:     findWO
+        /// 
+        /// Function:   runs throught the list and find the Work order
+        /// </summary>
+        /// <param name="WO"></param>
+        /// <returns></returns>
+        private work_order findWO(int WO)
+        {
+            int i = 0;
+            int result = 0;
+            if (orderList.Count > 0)
+            {
+                while (orderList.Count == i)
+                {
+                    if (orderList[i].WO_num == WO)
+                        result = i;
+                    i++;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error", "Cannot find or no data to pull");
+            }
+            return orderList[result];
+        }
         private void sortList()
         {
 
@@ -121,29 +146,46 @@ namespace Work_Order
         /// <param name="e"></param>
         private void bt_Upload_Click(object sender, EventArgs e)
         {
-            int size = -1;
-            DialogResult dialogResult = ofd_uploadFile.ShowDialog();
-            if (dialogResult == DialogResult.OK)
+            
+            //DialogResult dialogResult = ofd_uploadFile.ShowDialog();
+            //check if there is no error in WO# and openfileDialog for upload
+            if (ofd_uploadFile.ShowDialog() == DialogResult.OK 
+                && !string.IsNullOrEmpty(tb_WOnum.Text) 
+                && ("WO#" != tb_WOnum.Text))
             {
-                //string file = ofd_uploadFile.FileName;
+                int wo = Convert.ToInt32(tb_WOnum.Text);
+
+                //gets the file name
+                string file = Path.GetFileName(ofd_uploadFile.FileName);
+                
                 try
                 {
-                   // string text = File.ReadAllText(file);
-                    //Console.WriteLine(text);
-                    //size = text.Length;
-                    if(ofd_uploadFile.CheckFileExists)
+                    string createSubfolder = 
+                        "C:\\Project\\Repos\\Work-Order-Database\\Work Order\\Work Order\\ErwinDatabase\\WO#"
+                            + tb_WOnum.Text;
+                    Console.WriteLine(createSubfolder);
+                    //string text = File.ReadAllText(file);
+                    Console.WriteLine(file);
+                    //check if there is a file similar exists and check if there is a subfolder created
+                    if (ofd_uploadFile.CheckFileExists && !File.Exists(createSubfolder))
                     {
-                        System.IO.File.Copy(ofd_uploadFile.FileName, @"C:")
+                        Directory.CreateDirectory(createSubfolder);
+                        // get the original file path copy and sent it to new subfolder created
+                        File.Copy(ofd_uploadFile.FileName, createSubfolder +"\\"+ file);
+                        // save into the source path into the list
+                        saveList(createSubfolder + "\\" + file, wo);
                     }
                 }
                 catch(IOException)
                 {
-
+                    MessageBox.Show("Upload Error", "Unable to upload file to Database");
                 }
             }
-            Console.Write(size);
-
-            Console.WriteLine(dialogResult);
+            else
+            {
+                MessageBox.Show("Invalid Work Order");
+            }
+            //Console.WriteLine(dialogResult);
         }
         /// <summary>
         /// Method:     lv_database_SelectedIndexChanged

@@ -28,7 +28,7 @@ namespace Work_Order
         /// Function:   A method that acquire the source of the uploaded files
         ///             and saves as string to refer back to.
         /// </summary>
-        public static string Source_link
+        public string Source_link
         {
             get
             {
