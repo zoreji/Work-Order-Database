@@ -84,6 +84,31 @@ namespace Work_Order
 
         }
         /// <summary>
+        /// Method:     tempItems
+        /// 
+        /// Function:   Create 50 random items, add to the list, and displays it into
+        ///             the listview for testing purpose
+        /// </summary>
+        private void tempItems()
+        {
+            ListViewItem item;
+            lv_Database.Items.Clear();
+            Random rng = new Random();
+            for (int i = 0; i < 50; i++)
+            {
+                work_order order = new work_order();
+                orderList.Add(order);
+                orderList[i].WO_num = i;
+                orderList[i].SE_num = rng.Next(200);
+                orderList[i].SN_num = rng.Next(500) + " " + rng.Next(500);
+                orderList[i].WO_Date = tb_DATE.Text;
+                orderList[i].state = rb_Inprogress.Checked;
+
+                item = new ListViewItem(orderList[i].Get_wo_arr);
+                lv_Database.Items.Add(item);
+            }
+        }
+        /// <summary>
         /// Method:     loadList
         /// 
         /// Function:   find if there is a latest work order list in the system.
@@ -199,6 +224,19 @@ namespace Work_Order
         /// <param name="e"></param>
         private void lv_Database_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int itemSelect = 0;
+            //int index = lv_Database.SelectedIndices[0];
+            if (lv_Database.SelectedIndices.Count <= 0)
+            {
+                Console.WriteLine(sender.ToString());
+                Console.WriteLine(e.ToString());
+                itemSelect = lv_Database.SelectedItems.Count;
+                Console.WriteLine(itemSelect.ToString());
+                Console.WriteLine(lv_Database.SelectedItems.ToString());
+                Console.WriteLine(lv_Database.FocusedItem.Text);
+                Console.WriteLine(lv_Database.FocusedItem.Index);
+                //lv_Database.Select();
+            }
 
         }
 
@@ -233,6 +271,11 @@ namespace Work_Order
         private void tb_SNnum_MouseClick(object sender, MouseEventArgs e)
         {
             tb_SNnum.Text = null;
+        }
+
+        private void bt_Change_Click(object sender, EventArgs e)
+        {
+            tempItems();
         }
     }
 }

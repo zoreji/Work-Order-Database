@@ -82,8 +82,9 @@
             this.bt_Change.Name = "bt_Change";
             this.bt_Change.Size = new System.Drawing.Size(162, 35);
             this.bt_Change.TabIndex = 3;
-            this.bt_Change.Text = "Change";
+            this.bt_Change.Text = "Add 50 random";
             this.bt_Change.UseVisualStyleBackColor = true;
+            this.bt_Change.Click += new System.EventHandler(this.bt_Change_Click);
             // 
             // bt_Search
             // 
@@ -145,7 +146,9 @@
             // 
             this.lv_Database.FullRowSelect = true;
             this.lv_Database.GridLines = true;
+            this.lv_Database.HideSelection = false;
             this.lv_Database.Location = new System.Drawing.Point(12, 12);
+            this.lv_Database.MultiSelect = false;
             this.lv_Database.Name = "lv_Database";
             this.lv_Database.Size = new System.Drawing.Size(960, 560);
             this.lv_Database.TabIndex = 17;
