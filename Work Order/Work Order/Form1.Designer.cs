@@ -49,6 +49,7 @@
             // 
             // bt_Create_New_WO
             // 
+            this.bt_Create_New_WO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Create_New_WO.Location = new System.Drawing.Point(12, 588);
             this.bt_Create_New_WO.Name = "bt_Create_New_WO";
             this.bt_Create_New_WO.Size = new System.Drawing.Size(162, 35);
@@ -59,6 +60,7 @@
             // 
             // bt_Upload
             // 
+            this.bt_Upload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Upload.Location = new System.Drawing.Point(180, 588);
             this.bt_Upload.Name = "bt_Upload";
             this.bt_Upload.Size = new System.Drawing.Size(162, 35);
@@ -69,6 +71,7 @@
             // 
             // bt_Delete
             // 
+            this.bt_Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Delete.Location = new System.Drawing.Point(348, 588);
             this.bt_Delete.Name = "bt_Delete";
             this.bt_Delete.Size = new System.Drawing.Size(162, 35);
@@ -78,6 +81,7 @@
             // 
             // bt_Change
             // 
+            this.bt_Change.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Change.Location = new System.Drawing.Point(516, 588);
             this.bt_Change.Name = "bt_Change";
             this.bt_Change.Size = new System.Drawing.Size(162, 35);
@@ -88,6 +92,7 @@
             // 
             // bt_Search
             // 
+            this.bt_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Search.Location = new System.Drawing.Point(348, 655);
             this.bt_Search.Name = "bt_Search";
             this.bt_Search.Size = new System.Drawing.Size(162, 21);
@@ -97,6 +102,7 @@
             // 
             // tb_search
             // 
+            this.tb_search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tb_search.Location = new System.Drawing.Point(11, 655);
             this.tb_search.Name = "tb_search";
             this.tb_search.Size = new System.Drawing.Size(331, 20);
@@ -104,6 +110,7 @@
             // 
             // tb_WOnum
             // 
+            this.tb_WOnum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tb_WOnum.Location = new System.Drawing.Point(107, 629);
             this.tb_WOnum.Name = "tb_WOnum";
             this.tb_WOnum.Size = new System.Drawing.Size(66, 20);
@@ -115,6 +122,7 @@
             // 
             // tb_SEnum
             // 
+            this.tb_SEnum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tb_SEnum.Location = new System.Drawing.Point(444, 629);
             this.tb_SEnum.Name = "tb_SEnum";
             this.tb_SEnum.Size = new System.Drawing.Size(66, 20);
@@ -125,6 +133,7 @@
             // 
             // tb_DATE
             // 
+            this.tb_DATE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tb_DATE.Location = new System.Drawing.Point(12, 629);
             this.tb_DATE.Name = "tb_DATE";
             this.tb_DATE.Size = new System.Drawing.Size(90, 20);
@@ -134,6 +143,7 @@
             // 
             // tb_SNnum
             // 
+            this.tb_SNnum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tb_SNnum.Location = new System.Drawing.Point(348, 629);
             this.tb_SNnum.Name = "tb_SNnum";
             this.tb_SNnum.Size = new System.Drawing.Size(90, 20);
@@ -144,6 +154,9 @@
             // 
             // lv_Database
             // 
+            this.lv_Database.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lv_Database.FullRowSelect = true;
             this.lv_Database.GridLines = true;
             this.lv_Database.HideSelection = false;
@@ -159,6 +172,7 @@
             // 
             // tb_CLname
             // 
+            this.tb_CLname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tb_CLname.Location = new System.Drawing.Point(180, 629);
             this.tb_CLname.Name = "tb_CLname";
             this.tb_CLname.Size = new System.Drawing.Size(162, 20);
@@ -169,6 +183,7 @@
             // 
             // tb_description
             // 
+            this.tb_description.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tb_description.Location = new System.Drawing.Point(516, 629);
             this.tb_description.Name = "tb_description";
             this.tb_description.Size = new System.Drawing.Size(162, 20);
@@ -178,6 +193,7 @@
             // 
             // rb_Inprogress
             // 
+            this.rb_Inprogress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rb_Inprogress.AutoSize = true;
             this.rb_Inprogress.Checked = true;
             this.rb_Inprogress.Location = new System.Drawing.Point(684, 588);
@@ -190,6 +206,7 @@
             // 
             // rb_Delivered
             // 
+            this.rb_Delivered.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rb_Delivered.AutoSize = true;
             this.rb_Delivered.Location = new System.Drawing.Point(684, 606);
             this.rb_Delivered.Name = "rb_Delivered";
@@ -200,6 +217,8 @@
             // 
             // lb_links
             // 
+            this.lb_links.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_links.FormattingEnabled = true;
             this.lb_links.Location = new System.Drawing.Point(764, 588);
             this.lb_links.Name = "lb_links";
@@ -232,6 +251,7 @@
             this.Controls.Add(this.bt_Delete);
             this.Controls.Add(this.bt_Upload);
             this.Controls.Add(this.bt_Create_New_WO);
+            this.MinimumSize = new System.Drawing.Size(1000, 750);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
