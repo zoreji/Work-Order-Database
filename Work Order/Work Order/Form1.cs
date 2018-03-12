@@ -16,6 +16,7 @@ namespace Work_Order
     {
         List<work_order> orderList;
         DateTime time = new DateTime();
+        int itemSelect = 0;
         public Form1()
         {
             InitializeComponent();
@@ -108,6 +109,25 @@ namespace Work_Order
                 lv_Database.Items.Add(item);
             }
         }
+
+        private void writeTags(string path, work_order order)
+        {
+            StreamWriter file;
+            if (File.Exists(path + "\\tags.txt"))
+            {
+                File.Delete(path + "\\tags.txt");
+            }
+            file = new StreamWriter(path + "\\tags.txt");
+            foreach (string tags in order.Get_wo_arr)
+            {
+                file.WriteLine(tags);
+            }
+            foreach (string tags in order.Source_link) 
+            {
+                file.WriteLine(tags);
+            }
+            file.Close();
+        }
         /// <summary>
         /// Method:     loadList
         /// 
@@ -128,7 +148,7 @@ namespace Work_Order
         /// </summary>
         private void saveList(string path, int WO)
         {
-            findWO(WO).Source_link = path;
+            findWO(WO).Source_link.Add(path);
         }
         /// <summary>
         /// Method:     findWO
@@ -143,7 +163,7 @@ namespace Work_Order
             int result = 0;
             if (orderList.Count > 0)
             {
-                while (orderList.Count == i)
+                while (orderList.Count > i)
                 {
                     if (orderList[i].WO_num == WO)
                         result = i;
@@ -170,16 +190,12 @@ namespace Work_Order
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void bt_Upload_Click(object sender, EventArgs e)
-        {
-            
+        { 
             //DialogResult dialogResult = ofd_uploadFile.ShowDialog();
             //check if there is no error in WO# and openfileDialog for upload
             if (ofd_uploadFile.ShowDialog() == DialogResult.OK 
-                && !string.IsNullOrEmpty(tb_WOnum.Text) 
-                && ("WO#" != tb_WOnum.Text))
+                && (lv_Database.SelectedIndices.Count > 0))
             {
-                int wo = Convert.ToInt32(tb_WOnum.Text);
-
                 //gets the file name
                 string file = Path.GetFileName(ofd_uploadFile.FileName);
                 
@@ -187,18 +203,24 @@ namespace Work_Order
                 {
                     string createSubfolder = 
                         "C:\\Project\\Repos\\Work-Order-Database\\Work Order\\Work Order\\ErwinDatabase\\WO#"
-                            + tb_WOnum.Text;
+                            + orderList[itemSelect].WO_num;
                     Console.WriteLine(createSubfolder);
                     //string text = File.ReadAllText(file);
                     Console.WriteLine(file);
                     //check if there is a file similar exists and check if there is a subfolder created
-                    if (ofd_uploadFile.CheckFileExists && !File.Exists(createSubfolder))
+                    if (ofd_uploadFile.CheckFileExists && !File.Exists(createSubfolder +"\\" + file))
                     {
                         Directory.CreateDirectory(createSubfolder);
                         // get the original file path copy and sent it to new subfolder created
                         File.Copy(ofd_uploadFile.FileName, createSubfolder +"\\"+ file);
                         // save into the source path into the list
-                        saveList(createSubfolder + "\\" + file, wo);
+                        saveList(createSubfolder + "\\" + file, orderList[itemSelect].WO_num);
+                        writeTags(createSubfolder, orderList[itemSelect]);
+                    }
+                    else
+                    {
+                        File.Copy(ofd_uploadFile.FileName, createSubfolder + "\\" + file);
+                        writeTags(createSubfolder, orderList[itemSelect]);
                     }
                 }
                 catch(IOException)
@@ -224,18 +246,20 @@ namespace Work_Order
         /// <param name="e"></param>
         private void lv_Database_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int itemSelect = 0;
-            //int index = lv_Database.SelectedIndices[0];
-            if (lv_Database.SelectedIndices.Count <= 0)
+            lb_links.Items.Clear();
+            Console.WriteLine(lv_Database.SelectedIndices.Count);
+            if (lv_Database.SelectedIndices.Count > 0)
             {
-                Console.WriteLine(sender.ToString());
-                Console.WriteLine(e.ToString());
-                itemSelect = lv_Database.SelectedItems.Count;
+                
+                itemSelect = lv_Database.SelectedIndices[0];
                 Console.WriteLine(itemSelect.ToString());
-                Console.WriteLine(lv_Database.SelectedItems.ToString());
-                Console.WriteLine(lv_Database.FocusedItem.Text);
-                Console.WriteLine(lv_Database.FocusedItem.Index);
-                //lv_Database.Select();
+                if (orderList[itemSelect].Source_link != null)
+                {
+                    foreach (string itm in orderList[itemSelect].Source_link)
+                    {
+                        lb_links.Items.Add(itm);
+                    }
+                }
             }
 
         }
@@ -276,6 +300,7 @@ namespace Work_Order
         private void bt_Change_Click(object sender, EventArgs e)
         {
             tempItems();
+            //Console.WriteLine(lv_Database.SelectedIndices[0]);
         }
     }
 }

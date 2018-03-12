@@ -22,23 +22,7 @@ namespace Work_Order
         public string Client_name = "Seicor Inc.";
         public string details = "AOT 100 Ton Elevator";
         public string WO_Date;
-        /// <summary>
-        /// Method:     Source_link
-        /// 
-        /// Function:   A method that acquire the source of the uploaded files
-        ///             and saves as string to refer back to.
-        /// </summary>
-        public string Source_link
-        {
-            get
-            {
-                return Source_link;
-            }
-            set
-            {
-                Source_link = value;
-            }
-        }
+        public List<string> Source_link = new List<string>();
         public string[] Get_wo_arr
         {
             get
