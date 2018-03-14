@@ -110,7 +110,16 @@ namespace Work_Order
                 lv_Database.Items.Add(item);
             }
         }
-
+        /// <summary>
+        /// Method:     writeTags
+        /// 
+        /// function:   Create a StreamWriter to create a text file that holds
+        ///             all the information in each Work Order. Deletes any tag file
+        ///             created earlier, than re-create a new text file call tags and 
+        ///             sorts it with all the uploaded files
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="order"></param>
         private void writeTags(string path, work_order order)
         {
             StreamWriter file;
@@ -139,7 +148,7 @@ namespace Work_Order
         /// </summary>
         private void loadList()
         {
-
+            
         }
         //private void SaveDB()
         //{
@@ -225,8 +234,10 @@ namespace Work_Order
                         File.Copy(ofd_uploadFile.FileName, createSubfolder +"\\"+ file);
                         // save into the source path into the list
                         saveList(createSubfolder + "\\" + file, orderList[itemSelect].WO_num);
+                        //writes and save the tags assign to the work order
                         writeTags(createSubfolder, orderList[itemSelect]);
                     }
+                    //if there is a path already in place. copy and place in the destination
                     else
                     {
                         File.Copy(ofd_uploadFile.FileName, createSubfolder + "\\" + file);
@@ -256,15 +267,19 @@ namespace Work_Order
         /// <param name="e"></param>
         private void lv_Database_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //clear listbox
             lb_links.Items.Clear();
             Console.WriteLine(lv_Database.SelectedIndices.Count);
+            //checks if an item is selected in the list view  
             if (lv_Database.SelectedIndices.Count > 0)
             {
-                
+                //save the index where user selected
                 itemSelect = lv_Database.SelectedIndices[0];
                 Console.WriteLine(itemSelect.ToString());
+                //check if the source is empty
                 if (orderList[itemSelect].Source_link != null)
                 {
+                    //add and display the source into the list box
                     foreach (string itm in orderList[itemSelect].Source_link)
                     {
                         lb_links.Items.Add(itm);
@@ -311,6 +326,18 @@ namespace Work_Order
         {
             tempItems();
             //Console.WriteLine(lv_Database.SelectedIndices[0]);
+        }
+
+        private void bt_Delete_Click(object sender, EventArgs e)
+        {
+            ListViewItem obj;
+            orderList.Remove(orderList[itemSelect]);
+            lv_Database.Items.Clear();
+            foreach(work_order itm in orderList)
+            {
+                obj = new ListViewItem(itm.Get_wo_arr);
+                lv_Database.Items.Add(obj);
+            }
         }
     }
 }
