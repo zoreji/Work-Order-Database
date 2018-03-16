@@ -224,13 +224,7 @@ namespace Work_Order
                 string query =  "INSERT INTO WorkOrder " +
                                 "VALUES (@WO#, @Date, @SE#, @Client, @SN#, @Description, @Status)";
                 sql = new SqlCommand(query, cnn);
-                    
-                //           orderList[i].WO_num + ",'" +
-                //           orderList[i].WO_Date + "'," +
-                //           orderList[i].SN_num + "'," +
-                //           orderList[i].Client_name + "','" +
-                //           orderList[i].details + "','" +
-                //           orderList[i].state + ")";
+
                 sql.Parameters.Add("@WO#", orderList[i].WO_num);
                 sql.Parameters.Add("@Date", orderList[i].WO_Date);
                 sql.Parameters.Add("@SE#", orderList[i].SE_num);
@@ -258,7 +252,7 @@ namespace Work_Order
         {
             ConnectSQLServer();
             string query =  "CREATE TABLE WorkOrder (" +
-                            "WO# int," +
+                            "WO# int NOT NULL PRIMARY KEY," +
                             "Date varchar(225) NOT NULL," +
                             "SE# int," +
                             "Client varchar(225)," +
