@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-
+using System.Data.SqlClient;
+using System.Threading;
 
 
 namespace Work_Order
@@ -18,6 +19,9 @@ namespace Work_Order
         List<work_order> orderList;
         DateTime time = new DateTime();
         int itemSelect = 0;
+        string connectString = null;
+        SqlConnection cnn;
+        Thread sqlThread;
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +39,7 @@ namespace Work_Order
             lv_Database.Columns.Add("Description", 300);
             lv_Database.Columns.Add("Status", 100);
             tb_DATE.Text = time.ToString("MMM d, yyyy");
+            //InitialSql();
         }
         /// <summary>
         /// Method:     bt_Create_New_WO_Click
@@ -47,8 +52,8 @@ namespace Work_Order
         /// <param name="e"></param>
         private void bt_Create_New_WO_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(tb_WOnum.Text) && ("WO#" != tb_WOnum.Text) && 
-                !string.IsNullOrEmpty(tb_SEnum.Text) && ("SE#" != tb_SEnum.Text) && 
+            if (!string.IsNullOrEmpty(tb_WOnum.Text) && ("WO#" != tb_WOnum.Text) &&
+                !string.IsNullOrEmpty(tb_SEnum.Text) && ("SE#" != tb_SEnum.Text) &&
                 !string.IsNullOrEmpty(tb_WOnum.Text))
             {
                 ListViewItem itm;
@@ -61,13 +66,14 @@ namespace Work_Order
                 wo_item.SN_num = tb_SNnum.Text;
                 wo_item.Client_name = tb_CLname.Text;
                 wo_item.WO_Date = tb_DATE.Text;
-                wo_item.state = rb_Inprogress.Checked;
+                if (rb_Delivered.Checked)
+                    wo_item.state = 1;
                 //Adds the new created workorder object into the List<work_order>
                 orderList.Add(wo_item);
 
                 //A while loop to add each item in the List to the listview database
                 int i = 0;
-                while(i != orderList.Count)
+                while (i != orderList.Count)
                 {
                     itm = new ListViewItem(orderList[i].Get_wo_arr);
                     lv_Database.Items.Add(itm);
@@ -104,8 +110,8 @@ namespace Work_Order
                 orderList[i].SE_num = rng.Next(200);
                 orderList[i].SN_num = rng.Next(500) + " " + rng.Next(500);
                 orderList[i].WO_Date = tb_DATE.Text;
-                orderList[i].state = rb_Inprogress.Checked;
-
+                if (rb_Delivered.Checked)
+                    orderList[i].state = 1;
                 item = new ListViewItem(orderList[i].Get_wo_arr);
                 lv_Database.Items.Add(item);
             }
@@ -132,7 +138,7 @@ namespace Work_Order
             {
                 file.WriteLine(tags);
             }
-            foreach (string tags in order.Source_link) 
+            foreach (string tags in order.Source_link)
             {
                 file.WriteLine(tags);
             }
@@ -148,7 +154,7 @@ namespace Work_Order
         /// </summary>
         private void loadList()
         {
-            
+
         }
         //private void SaveDB()
         //{
@@ -194,6 +200,117 @@ namespace Work_Order
                 MessageBox.Show("Error", "Cannot find or no data to pull");
             }
             return orderList[result];
+        }
+        /// <summary>
+        /// Method:     ConnectSQLServer
+        /// 
+        /// Function:   Connect to the SQL Server, login to the Server
+        ///             ensure that it connected to the correct Data Source
+        /// </summary>
+        private void ConnectSQLServer()
+        {
+            connectString = "Data Source=DESKTOP-D0ITPG7\\SEICORSSQL;" +
+                            "Initial Catalog=master;Integrated Security=True";
+            cnn = new SqlConnection(connectString);
+        }
+        private void InsertSQL(int i)
+        {
+            ConnectSQLServer();
+            SqlCommand sql;
+            try
+            {
+                cnn.Open();
+
+                string query =  "INSERT INTO WorkOrder " +
+                                "VALUES (@WO#, @Date, @SE#, @Client, @SN#, @Description, @Status)";
+                sql = new SqlCommand(query, cnn);
+                    
+                //           orderList[i].WO_num + ",'" +
+                //           orderList[i].WO_Date + "'," +
+                //           orderList[i].SN_num + "'," +
+                //           orderList[i].Client_name + "','" +
+                //           orderList[i].details + "','" +
+                //           orderList[i].state + ")";
+                sql.Parameters.Add("@WO#", orderList[i].WO_num);
+                sql.Parameters.Add("@Date", orderList[i].WO_Date);
+                sql.Parameters.Add("@SE#", orderList[i].SE_num);
+                sql.Parameters.Add("@Client", orderList[i].Client_name);
+                sql.Parameters.Add("@SN#", orderList[i].SN_num);
+                sql.Parameters.Add("@Description", orderList[i].details);
+                sql.Parameters.Add("@Status", orderList[i].state);
+                sql.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Failed to Insert Values");
+            }
+            finally
+            {
+                if (cnn.State == ConnectionState.Open)
+                {
+                    cnn.Close();
+                }
+            }
+
+        }
+        private void InitialSqlTable()
+        {
+            ConnectSQLServer();
+            string query =  "CREATE TABLE WorkOrder (" +
+                            "WO# int," +
+                            "Date varchar(225) NOT NULL," +
+                            "SE# int," +
+                            "Client varchar(225)," +
+                            "SN# varchar(225)," +
+                            "Description varchar(225)," +
+                            "Status Bit" +
+                            ");";
+            SqlCommand sqlCommand = new SqlCommand(query, cnn);
+            try
+            {
+                cnn.Open();
+                sqlCommand.ExecuteNonQuery();
+                MessageBox.Show("Table Created Successfully");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Table failed to create");
+            }
+            finally
+            {
+                if(cnn.State == ConnectionState.Open)
+                {
+                    cnn.Close();
+                }
+            }
+        }
+        private void DeleteSqlTable()
+        {
+            ConnectSQLServer();
+            string query = "DROP TABLE WorkOrder";
+            SqlCommand sqlCommand = new SqlCommand(query, cnn);
+            try
+            {
+                cnn.Open();
+                sqlCommand.ExecuteNonQuery();
+                MessageBox.Show("Table Deleted Successfully");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Table failed to Delete");
+            }
+            finally
+            {
+                if (cnn.State == ConnectionState.Open)
+                {
+                    cnn.Close();
+                }
+            }
+        }
+        private void InitialThreads()
+        {
+
         }
         private void sortList()
         {
@@ -337,6 +454,26 @@ namespace Work_Order
             {
                 obj = new ListViewItem(itm.Get_wo_arr);
                 lv_Database.Items.Add(obj);
+            }
+        }
+
+        private void bt_CreateTB_Click(object sender, EventArgs e)
+        {
+            InitialSqlTable();
+        }
+
+        private void bt_DeleteTB_Click(object sender, EventArgs e)
+        {
+            DeleteSqlTable();
+        }
+
+        private void bt_Insert_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+            while (orderList.Count > i)
+            {
+                InsertSQL(i);
+                i++;
             }
         }
     }

@@ -45,6 +45,9 @@
             this.rb_Delivered = new System.Windows.Forms.RadioButton();
             this.lb_links = new System.Windows.Forms.ListBox();
             this.ofd_uploadFile = new System.Windows.Forms.OpenFileDialog();
+            this.bt_CreateTB = new System.Windows.Forms.Button();
+            this.bt_DeleteTB = new System.Windows.Forms.Button();
+            this.bt_Insert = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bt_Create_New_WO
@@ -231,11 +234,47 @@
             // 
             this.ofd_uploadFile.FileName = "openFileDialog1";
             // 
+            // bt_CreateTB
+            // 
+            this.bt_CreateTB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bt_CreateTB.Location = new System.Drawing.Point(516, 655);
+            this.bt_CreateTB.Name = "bt_CreateTB";
+            this.bt_CreateTB.Size = new System.Drawing.Size(162, 21);
+            this.bt_CreateTB.TabIndex = 24;
+            this.bt_CreateTB.Text = "Create Table";
+            this.bt_CreateTB.UseVisualStyleBackColor = true;
+            this.bt_CreateTB.Click += new System.EventHandler(this.bt_CreateTB_Click);
+            // 
+            // bt_DeleteTB
+            // 
+            this.bt_DeleteTB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bt_DeleteTB.Location = new System.Drawing.Point(516, 679);
+            this.bt_DeleteTB.Name = "bt_DeleteTB";
+            this.bt_DeleteTB.Size = new System.Drawing.Size(162, 20);
+            this.bt_DeleteTB.TabIndex = 25;
+            this.bt_DeleteTB.Text = "Delete Table";
+            this.bt_DeleteTB.UseVisualStyleBackColor = true;
+            this.bt_DeleteTB.Click += new System.EventHandler(this.bt_DeleteTB_Click);
+            // 
+            // bt_Insert
+            // 
+            this.bt_Insert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bt_Insert.Location = new System.Drawing.Point(348, 679);
+            this.bt_Insert.Name = "bt_Insert";
+            this.bt_Insert.Size = new System.Drawing.Size(162, 20);
+            this.bt_Insert.TabIndex = 26;
+            this.bt_Insert.Text = "Insert to Table";
+            this.bt_Insert.UseVisualStyleBackColor = true;
+            this.bt_Insert.Click += new System.EventHandler(this.bt_Insert_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 711);
+            this.Controls.Add(this.bt_Insert);
+            this.Controls.Add(this.bt_DeleteTB);
+            this.Controls.Add(this.bt_CreateTB);
             this.Controls.Add(this.lb_links);
             this.Controls.Add(this.rb_Delivered);
             this.Controls.Add(this.rb_Inprogress);
@@ -279,6 +318,9 @@
         private System.Windows.Forms.RadioButton rb_Delivered;
         private System.Windows.Forms.ListBox lb_links;
         private System.Windows.Forms.OpenFileDialog ofd_uploadFile;
+        private System.Windows.Forms.Button bt_CreateTB;
+        private System.Windows.Forms.Button bt_DeleteTB;
+        private System.Windows.Forms.Button bt_Insert;
     }
 }
 

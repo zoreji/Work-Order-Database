@@ -18,7 +18,7 @@ namespace Work_Order
         public int WO_num = 0;
         public int SE_num = 0;
         public string SN_num = "000 000";
-        public bool state = true;
+        public int state = 0;
         public string Client_name = "Seicor Inc.";
         public string details = "AOT 100 Ton Elevator";
         public string WO_Date;
@@ -46,7 +46,7 @@ namespace Work_Order
             WO_arr[3] = SN_num;
             WO_arr[4] = SE_num.ToString();
             WO_arr[5] = details;
-            if (!state)
+            if (state == 1)
                 WO_arr[6] = "Delivered";
             else
                 WO_arr[6] = "Inprogress";
