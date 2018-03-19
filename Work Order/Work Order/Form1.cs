@@ -279,10 +279,56 @@ namespace Work_Order
                 }
             }
         }
+        private void CreateFileSQL()
+        {
+            ConnectSQLServer();
+            string query = "CREATE TABLE WO_Files (" +
+                            "WO_File MEDIUMBLOB," +
+                            "WO# int FOREIGN KEY REFERENCES WorkOrder(WO#)" +
+                            ");";
+            SqlCommand sqlCommand = new SqlCommand(query, cnn);
+            try
+            {
+                cnn.Open();
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Fail to create Files Table");
+            }
+            finally
+            {
+                if (cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            }
+        }
         private void DeleteSqlTable()
         {
             ConnectSQLServer();
             string query = "DROP TABLE WorkOrder";
+            SqlCommand sqlCommand = new SqlCommand(query, cnn);
+            try
+            {
+                cnn.Open();
+                sqlCommand.ExecuteNonQuery();
+                MessageBox.Show("Table Deleted Successfully");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Table failed to Delete");
+            }
+            finally
+            {
+                if (cnn.State == ConnectionState.Open)
+                {
+                    cnn.Close();
+                }
+            }
+        }
+        private void DeleteWOTable()
+        {
+            ConnectSQLServer();
+            string query = "DROP TABLE WO_Files";
             SqlCommand sqlCommand = new SqlCommand(query, cnn);
             try
             {
@@ -397,7 +443,6 @@ namespace Work_Order
                     }
                 }
             }
-
         }
 
         private void tb_WOnum_KeyPress(object sender, KeyPressEventArgs e)
@@ -454,11 +499,13 @@ namespace Work_Order
         private void bt_CreateTB_Click(object sender, EventArgs e)
         {
             InitialSqlTable();
+            CreateFileSQL();
         }
 
         private void bt_DeleteTB_Click(object sender, EventArgs e)
         {
             DeleteSqlTable();
+            DeleteWOTable();
         }
 
         private void bt_Insert_Click(object sender, EventArgs e)

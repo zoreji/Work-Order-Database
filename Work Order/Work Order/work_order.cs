@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Work_Order
 {
@@ -23,6 +24,7 @@ namespace Work_Order
         public string details = "AOT 100 Ton Elevator";
         public string WO_Date;
         public List<string> Source_link = new List<string>();
+        public List<byte[]> Binary_Source_Link = new List<byte[]>();
         public string[] Get_wo_arr
         {
             get
@@ -52,6 +54,17 @@ namespace Work_Order
                 WO_arr[6] = "Inprogress";
             return WO_arr;
         }
-
+        public void ConvertAddToList()
+        {
+            if (Source_link.Count > 0)
+            {
+                foreach (string links in Source_link)
+                {
+                    var stream = new FileStream(links, FileMode.Open, FileAccess.Read);
+                    var reader = new BinaryReader(stream);
+                    Binary_Source_Link.Add(reader.ReadBytes((int)stream.Length));
+                }
+            }
+        }
     }
 }
