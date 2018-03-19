@@ -248,6 +248,31 @@ namespace Work_Order
             }
 
         }
+        private void insertBinary(work_order wo, byte[] bit)
+        {
+            ConnectSQLServer();
+            try
+            {
+                SqlCommand sql;
+                string query =  "INSERT INTO WO_Files " +
+                                "VALUE (@WO_file, @WO#)";
+                sql = new SqlCommand(query, cnn);
+
+                sql.Parameters.Add("@WO_file", bit);
+                sql.Parameters.Add("@WO#", wo);
+                sql.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Fail to upload file to database");
+            }
+            finally
+            {
+                if (cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            }
+        }
         private void InitialSqlTable()
         {
             ConnectSQLServer();
@@ -393,6 +418,11 @@ namespace Work_Order
                         saveList(createSubfolder + "\\" + file, orderList[itemSelect].WO_num);
                         //writes and save the tags assign to the work order
                         writeTags(createSubfolder, orderList[itemSelect]);
+                        foreach(byte[] b in orderList[itemSelect].Binary_Source_Link)
+                        {
+                            if (b.Contains()
+                            insertBinary(orderList[itemSelect], b);
+                        }
                     }
                     //if there is a path already in place. copy and place in the destination
                     else
@@ -412,6 +442,26 @@ namespace Work_Order
             }
             //Console.WriteLine(dialogResult);
         }
+        private void InsertUploadALL()
+        {
+            //ConnectSQLServer();
+            try
+            {
+                foreach(work_order wo in orderList)
+                {
+                    wo.ConvertAddToList();
+                    foreach(byte[] b in wo.Binary_Source_Link)
+                    {
+                        insertBinary(wo, b);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Unable to upload File to Database");
+            }
+        }
+        
         /// <summary>
         /// Method:     lv_database_SelectedIndexChanged
         /// 

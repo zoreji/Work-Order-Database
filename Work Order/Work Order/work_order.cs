@@ -68,3 +68,11 @@ namespace Work_Order
         }
     }
 }
+/* Need to find a way to search the list of link and/or binary sources if they a item already
+ * in the database.
+ * if there is already a copy of the file, stop the upload and remind the user there is already an copy
+ * of the file store in the database.
+ * skips the insert process and continue on to the next item in the list.
+ * if the list has come to the end then, end the process and display all the data on to the main client
+ * program.
+ */
