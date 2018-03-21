@@ -213,6 +213,13 @@ namespace Work_Order
                             "Initial Catalog=master;Integrated Security=True";
             cnn = new SqlConnection(connectString);
         }
+        /// <summary>
+        /// Method:     InsertSql
+        /// 
+        /// Function:   Programmicaly inserts sql code into the sql server to add and insert
+        ///             from the client information
+        /// </summary>
+        /// <param name="i"></param>
         private void InsertSQL(int i)
         {
             ConnectSQLServer();
@@ -248,6 +255,15 @@ namespace Work_Order
             }
 
         }
+        /// <summary>
+        /// Method:        insertBinary
+        /// 
+        /// Function:      adds and inserts new upload files into the sql server
+        ///                Converts the files into bytes form and tags them with a
+        ///                wo# and add into the add into the WO_Files server
+        /// </summary>
+        /// <param name="wo"></param>
+        /// <param name="bit"></param>
         private void insertBinary(work_order wo, byte[] bit)
         {
             ConnectSQLServer();
@@ -273,6 +289,12 @@ namespace Work_Order
                     cnn.Close();
             }
         }
+
+        /// <summary>
+        /// Method:     InitialSqlTable
+        /// 
+        /// Function:   Create a new Table in the Sql Server call WorkOrder
+        /// </summary>
         private void InitialSqlTable()
         {
             ConnectSQLServer();
@@ -418,10 +440,14 @@ namespace Work_Order
                         saveList(createSubfolder + "\\" + file, orderList[itemSelect].WO_num);
                         //writes and save the tags assign to the work order
                         writeTags(createSubfolder, orderList[itemSelect]);
+                        byte[] bit;
+                        var stream = new FileStream(createSubfolder + "\\" + file, FileMode.Open, FileAccess.Read);
+                        var reader = new BinaryReader(stream);
+                        bit = reader.ReadBytes((int)stream.Length);
                         foreach(byte[] b in orderList[itemSelect].Binary_Source_Link)
                         {
-                            if (b.Contains()
-                            insertBinary(orderList[itemSelect], b);
+                            if (!orderList[itemSelect].Binary_Source_Link.Contains(bit))
+                                insertBinary(orderList[itemSelect], b);
                         }
                     }
                     //if there is a path already in place. copy and place in the destination
