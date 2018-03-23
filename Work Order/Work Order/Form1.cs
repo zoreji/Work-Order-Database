@@ -326,11 +326,17 @@ namespace Work_Order
                 }
             }
         }
+        /// <summary>
+        /// Method:     CreateFileSQL
+        /// 
+        /// Function:   Create a table call WO_Files that stores Files into
+        ///             binary and save in the table
+        /// </summary>
         private void CreateFileSQL()
         {
             ConnectSQLServer();
-            string query = "CREATE TABLE WO_Files (" +
-                            "WO_File MEDIUMBLOB," +
+            string query =  "CREATE TABLE WO_Files (" +
+                            "WO_File varbinary(max)," +
                             "WO# int FOREIGN KEY REFERENCES WorkOrder(WO#)" +
                             ");";
             SqlCommand sqlCommand = new SqlCommand(query, cnn);
@@ -349,6 +355,11 @@ namespace Work_Order
                     cnn.Close();
             }
         }
+        /// <summary>
+        /// Method:     DeleteSqlTable
+        /// 
+        /// Function:   Delete table WorkOrder in the sql servers and clear it
+        /// </summary>
         private void DeleteSqlTable()
         {
             ConnectSQLServer();
@@ -372,6 +383,11 @@ namespace Work_Order
                 }
             }
         }
+        /// <summary>
+        /// Method:     DeleteWOTable
+        /// 
+        /// Function:   Delete table WO_Files in the sql server and clear it
+        /// </summary>
         private void DeleteWOTable()
         {
             ConnectSQLServer();
@@ -431,6 +447,7 @@ namespace Work_Order
                     //string text = File.ReadAllText(file);
                     Console.WriteLine(file);
                     //check if there is a file similar exists and check if there is a subfolder created
+                    
                     if (ofd_uploadFile.CheckFileExists && !File.Exists(createSubfolder +"\\" + file))
                     {
                         Directory.CreateDirectory(createSubfolder);
@@ -444,22 +461,42 @@ namespace Work_Order
                         var stream = new FileStream(createSubfolder + "\\" + file, FileMode.Open, FileAccess.Read);
                         var reader = new BinaryReader(stream);
                         bit = reader.ReadBytes((int)stream.Length);
-                        foreach(byte[] b in orderList[itemSelect].Binary_Source_Link)
+                        if (!orderList[itemSelect].Binary_Source_Link.Contains(bit))
                         {
-                            if (!orderList[itemSelect].Binary_Source_Link.Contains(bit))
-                                insertBinary(orderList[itemSelect], b);
+                            orderList[itemSelect].Binary_Source_Link.Add(bit);
+                            foreach (byte[] b in orderList[itemSelect].Binary_Source_Link)
+                            {
+                                if (!orderList[itemSelect].Binary_Source_Link.Contains(bit))
+                                    insertBinary(orderList[itemSelect], b);
+                            }
+
                         }
+                        
                     }
                     //if there is a path already in place. copy and place in the destination
                     else
                     {
                         File.Copy(ofd_uploadFile.FileName, createSubfolder + "\\" + file);
                         writeTags(createSubfolder, orderList[itemSelect]);
+                        byte[] bit;
+                        var stream = new FileStream(createSubfolder + "\\" + file, FileMode.Open, FileAccess.Read);
+                        var reader = new BinaryReader(stream);
+                        bit = reader.ReadBytes((int)stream.Length);
+                        if(!orderList[itemSelect].Binary_Source_Link.Contains(bit))
+                        {
+                            orderList[itemSelect].Binary_Source_Link.Add(bit);
+                            foreach (byte[] b in orderList[itemSelect].Binary_Source_Link) 
+                            {
+                                if (!orderList[itemSelect].Binary_Source_Link.Contains(bit))
+                                    insertBinary(orderList[itemSelect], b);
+                            }
+                        }
+
                     }
                 }
-                catch(IOException)
+                catch(IOException ex)
                 {
-                    MessageBox.Show("Upload Error", "Unable to upload file to Database");
+                    MessageBox.Show(ex.ToString(), "Unable to upload file to Database");
                 }
             }
             else
@@ -467,27 +504,7 @@ namespace Work_Order
                 MessageBox.Show("Invalid Work Order");
             }
             //Console.WriteLine(dialogResult);
-        }
-        private void InsertUploadALL()
-        {
-            //ConnectSQLServer();
-            try
-            {
-                foreach(work_order wo in orderList)
-                {
-                    wo.ConvertAddToList();
-                    foreach(byte[] b in wo.Binary_Source_Link)
-                    {
-                        insertBinary(wo, b);
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Unable to upload File to Database");
-            }
-        }
-        
+        }       
         /// <summary>
         /// Method:     lv_database_SelectedIndexChanged
         /// 
