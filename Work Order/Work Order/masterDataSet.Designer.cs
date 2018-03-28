@@ -28,7 +28,7 @@ namespace Work_Order {
         
         private WorkOrderDataTable tableWorkOrder;
         
-        private global::System.Data.DataRelation _relationFK__WO_Files__WO___5649C92D;
+        private global::System.Data.DataRelation _relationFK__WO_Files__WO___5A1A5A11;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -220,7 +220,7 @@ namespace Work_Order {
                     this.tableWorkOrder.InitVars();
                 }
             }
-            this._relationFK__WO_Files__WO___5649C92D = this.Relations["FK__WO_Files__WO#__5649C92D"];
+            this._relationFK__WO_Files__WO___5A1A5A11 = this.Relations["FK__WO_Files__WO#__5A1A5A11"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -235,10 +235,10 @@ namespace Work_Order {
             base.Tables.Add(this.tableWO_Files);
             this.tableWorkOrder = new WorkOrderDataTable();
             base.Tables.Add(this.tableWorkOrder);
-            this._relationFK__WO_Files__WO___5649C92D = new global::System.Data.DataRelation("FK__WO_Files__WO#__5649C92D", new global::System.Data.DataColumn[] {
+            this._relationFK__WO_Files__WO___5A1A5A11 = new global::System.Data.DataRelation("FK__WO_Files__WO#__5A1A5A11", new global::System.Data.DataColumn[] {
                         this.tableWorkOrder._WO_Column}, new global::System.Data.DataColumn[] {
                         this.tableWO_Files._WO_Column}, false);
-            this.Relations.Add(this._relationFK__WO_Files__WO___5649C92D);
+            this.Relations.Add(this._relationFK__WO_Files__WO___5A1A5A11);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -411,13 +411,13 @@ namespace Work_Order {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public WO_FilesRow AddWO_FilesRow(byte[] WO_File, WorkOrderRow _parentWorkOrderRowByFK__WO_Files__WO___5649C92D) {
+            public WO_FilesRow AddWO_FilesRow(byte[] WO_File, WorkOrderRow _parentWorkOrderRowByFK__WO_Files__WO___5A1A5A11) {
                 WO_FilesRow rowWO_FilesRow = ((WO_FilesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         WO_File,
                         null};
-                if ((_parentWorkOrderRowByFK__WO_Files__WO___5649C92D != null)) {
-                    columnValuesArray[1] = _parentWorkOrderRowByFK__WO_Files__WO___5649C92D[0];
+                if ((_parentWorkOrderRowByFK__WO_Files__WO___5A1A5A11 != null)) {
+                    columnValuesArray[1] = _parentWorkOrderRowByFK__WO_Files__WO___5A1A5A11[0];
                 }
                 rowWO_FilesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowWO_FilesRow);
@@ -983,10 +983,10 @@ namespace Work_Order {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public WorkOrderRow WorkOrderRow {
                 get {
-                    return ((WorkOrderRow)(this.GetParentRow(this.Table.ParentRelations["FK__WO_Files__WO#__5649C92D"])));
+                    return ((WorkOrderRow)(this.GetParentRow(this.Table.ParentRelations["FK__WO_Files__WO#__5A1A5A11"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK__WO_Files__WO#__5649C92D"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK__WO_Files__WO#__5A1A5A11"]);
                 }
             }
             
@@ -1194,11 +1194,11 @@ namespace Work_Order {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public WO_FilesRow[] GetWO_FilesRows() {
-                if ((this.Table.ChildRelations["FK__WO_Files__WO#__5649C92D"] == null)) {
+                if ((this.Table.ChildRelations["FK__WO_Files__WO#__5A1A5A11"] == null)) {
                     return new WO_FilesRow[0];
                 }
                 else {
-                    return ((WO_FilesRow[])(base.GetChildRows(this.Table.ChildRelations["FK__WO_Files__WO#__5649C92D"])));
+                    return ((WO_FilesRow[])(base.GetChildRows(this.Table.ChildRelations["FK__WO_Files__WO#__5A1A5A11"])));
                 }
             }
         }

@@ -274,7 +274,7 @@ namespace Work_Order
                                 "VALUE (@WO_file, @WO#)";
                 sql = new SqlCommand(query, cnn);
 
-                sql.Parameters.Add("@WO_file", bit);
+                sql.Parameters.AddWithValue("@WO_file", bit);
                 sql.Parameters.Add("@WO#", wo);
                 sql.ExecuteNonQuery();
 
@@ -447,32 +447,34 @@ namespace Work_Order
                     //string text = File.ReadAllText(file);
                     Console.WriteLine(file);
                     //check if there is a file similar exists and check if there is a subfolder created
-                    
                     if (ofd_uploadFile.CheckFileExists && !File.Exists(createSubfolder +"\\" + file))
                     {
+                        //create a new directory path with the createSubfolder path
                         Directory.CreateDirectory(createSubfolder);
-                        // get the original file path copy and sent it to new subfolder created
+                        // get the original file path copy and sent it to new subfolder directory created
                         File.Copy(ofd_uploadFile.FileName, createSubfolder +"\\"+ file);
                         // save into the source path into the list
                         saveList(createSubfolder + "\\" + file, orderList[itemSelect].WO_num);
                         //writes and save the tags assign to the work order
                         writeTags(createSubfolder, orderList[itemSelect]);
-                        byte[] bit;
-                        var stream = new FileStream(createSubfolder + "\\" + file, FileMode.Open, FileAccess.Read);
-                        var reader = new BinaryReader(stream);
-                        bit = reader.ReadBytes((int)stream.Length);
+                        byte[] bit = null;
+
+                        FileStream stream = new FileStream(createSubfolder + "\\" + file, FileMode.Open, FileAccess.Read);
+                        int length = (int)stream.Length;
+                        bit = new byte[length];
+                        //var reader = new BinaryReader(stream);
+                        //bit = reader.ReadBytes((int)stream.Length);
+                        StreamReader sr = new StreamReader(createSubfolder + "\\" + file);
+                        bit = ReadFile(createSubfolder + "\\" + file);
                         if (!orderList[itemSelect].Binary_Source_Link.Contains(bit))
                         {
                             orderList[itemSelect].Binary_Source_Link.Add(bit);
-                            foreach (byte[] b in orderList[itemSelect].Binary_Source_Link)
-                            {
-                                if (!orderList[itemSelect].Binary_Source_Link.Contains(bit))
-                                    insertBinary(orderList[itemSelect], b);
-                            }
-
+                            insertBinary(orderList[itemSelect], bit);
                         }
                         
                     }
+
+
                     //if there is a path already in place. copy and place in the destination
                     else
                     {
@@ -485,11 +487,7 @@ namespace Work_Order
                         if(!orderList[itemSelect].Binary_Source_Link.Contains(bit))
                         {
                             orderList[itemSelect].Binary_Source_Link.Add(bit);
-                            foreach (byte[] b in orderList[itemSelect].Binary_Source_Link) 
-                            {
-                                if (!orderList[itemSelect].Binary_Source_Link.Contains(bit))
-                                    insertBinary(orderList[itemSelect], b);
-                            }
+                            insertBinary(orderList[itemSelect], bit);
                         }
 
                     }
@@ -504,7 +502,31 @@ namespace Work_Order
                 MessageBox.Show("Invalid Work Order");
             }
             //Console.WriteLine(dialogResult);
-        }       
+        }
+        private byte[] ReadFile(string filePath)
+        {
+            byte[] buffer = null;
+            FileStream sr = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            try
+            {
+                int length = (int)sr.Length;
+                buffer = new byte[length];
+                int count;
+                int sum = 0;
+
+                while ((count = sr.Read(buffer, sum, length - sum)) > 0)
+                    sum += count;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "ERROR CANNOT READ FILE");
+            }
+            finally
+            {
+                sr.Close();
+            }
+            return buffer;
+        }
         /// <summary>
         /// Method:     lv_database_SelectedIndexChanged
         /// 

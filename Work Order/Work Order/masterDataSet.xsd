@@ -180,7 +180,7 @@ SELECT WO#, Date, SE#, Client, SN#, Description, Status FROM WorkOrder WHERE (WO
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK__WO_Files__WO_x0023___5649C92D" msdata:parent="WorkOrder" msdata:child="WO_Files" msdata:parentkey="WO_x0023_" msdata:childkey="WO_x0023_" msprop:Generator_UserChildTable="WO_Files" msprop:Generator_ChildPropName="GetWO_FilesRows" msprop:Generator_UserRelationName="FK__WO_Files__WO#__5649C92D" msprop:Generator_RelationVarName="_relationFK__WO_Files__WO___5649C92D" msprop:Generator_UserParentTable="WorkOrder" msprop:Generator_ParentPropName="WorkOrderRow" />
+      <msdata:Relationship name="FK__WO_Files__WO_x0023___5A1A5A11" msdata:parent="WorkOrder" msdata:child="WO_Files" msdata:parentkey="WO_x0023_" msdata:childkey="WO_x0023_" msprop:Generator_UserChildTable="WO_Files" msprop:Generator_ChildPropName="GetWO_FilesRows" msprop:Generator_UserRelationName="FK__WO_Files__WO#__5A1A5A11" msprop:Generator_RelationVarName="_relationFK__WO_Files__WO___5A1A5A11" msprop:Generator_UserParentTable="WorkOrder" msprop:Generator_ParentPropName="WorkOrderRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
