@@ -264,17 +264,18 @@ namespace Work_Order
         /// </summary>
         /// <param name="wo"></param>
         /// <param name="bit"></param>
-        private void insertBinary(work_order wo, byte[] bit)
+        private void insertBinary(int wo, byte[] bit)
         {
             ConnectSQLServer();
             try
             {
+                cnn.Open();
                 SqlCommand sql;
                 string query =  "INSERT INTO WO_Files " +
-                                "VALUE (@WO_file, @WO#)";
+                                "VALUES (@WO_file, @WO#)";
                 sql = new SqlCommand(query, cnn);
 
-                sql.Parameters.AddWithValue("@WO_file", bit);
+                sql.Parameters.Add("@WO_file", bit);
                 sql.Parameters.Add("@WO#", wo);
                 sql.ExecuteNonQuery();
 
@@ -469,7 +470,7 @@ namespace Work_Order
                         if (!orderList[itemSelect].Binary_Source_Link.Contains(bit))
                         {
                             orderList[itemSelect].Binary_Source_Link.Add(bit);
-                            insertBinary(orderList[itemSelect], bit);
+                            insertBinary(orderList[itemSelect].WO_num, bit);
                         }
                         
                     }
@@ -487,7 +488,7 @@ namespace Work_Order
                         if(!orderList[itemSelect].Binary_Source_Link.Contains(bit))
                         {
                             orderList[itemSelect].Binary_Source_Link.Add(bit);
-                            insertBinary(orderList[itemSelect], bit);
+                            insertBinary(orderList[itemSelect].WO_num, bit);
                         }
 
                     }
