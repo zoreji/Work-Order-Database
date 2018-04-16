@@ -528,6 +528,44 @@ namespace Work_Order
             }
             return buffer;
         }
+        private void CreateFillTable()
+        {
+            lv_Database.Items.Clear();
+            ListViewItem item;
+            lv_Database.View = View.Details;
+            ConnectSQLServer();
+            cnn.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter("select * from WorkOrder", cnn);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            try
+            {
+                for (int i = 0; i < data.Rows.Count; i++)
+                {
+                    DataRow row = data.Rows[i];
+                    item = new ListViewItem(row["Date"].ToString());
+                    item.SubItems.Add(row["WO#"].ToString());
+                    item.SubItems.Add(row["Client"].ToString());
+                    item.SubItems.Add(row["SE#"].ToString());
+                    item.SubItems.Add(row["SN#"].ToString());
+                    item.SubItems.Add(row["Description"].ToString());
+                    item.SubItems.Add(row["Status"].ToString());
+                    lv_Database.Items.Add(item);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+               if(cnn.State ==ConnectionState.Open)
+                {
+                    cnn.Close();
+                }
+            }
+
+        }
         /// <summary>
         /// Method:     lv_database_SelectedIndexChanged
         /// 
