@@ -48,6 +48,7 @@
             this.bt_CreateTB = new System.Windows.Forms.Button();
             this.bt_DeleteTB = new System.Windows.Forms.Button();
             this.bt_Insert = new System.Windows.Forms.Button();
+            this.bt_fill = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bt_Create_New_WO
@@ -267,11 +268,21 @@
             this.bt_Insert.UseVisualStyleBackColor = true;
             this.bt_Insert.Click += new System.EventHandler(this.bt_Insert_Click);
             // 
+            // bt_fill
+            // 
+            this.bt_fill.Location = new System.Drawing.Point(11, 679);
+            this.bt_fill.Name = "bt_fill";
+            this.bt_fill.Size = new System.Drawing.Size(331, 20);
+            this.bt_fill.TabIndex = 27;
+            this.bt_fill.Text = "Fill";
+            this.bt_fill.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 711);
+            this.Controls.Add(this.bt_fill);
             this.Controls.Add(this.bt_Insert);
             this.Controls.Add(this.bt_DeleteTB);
             this.Controls.Add(this.bt_CreateTB);
@@ -321,6 +332,7 @@
         private System.Windows.Forms.Button bt_CreateTB;
         private System.Windows.Forms.Button bt_DeleteTB;
         private System.Windows.Forms.Button bt_Insert;
+        private System.Windows.Forms.Button bt_fill;
     }
 }
 
